@@ -140,3 +140,7 @@ AWS can change these details. Check the [official exam page](https://aws.amazon.
 ## Disclaimer
 
 An independent study resource. Not affiliated with, endorsed by or sponsored by Amazon Web Services.
+
+## Other paths
+
+- **CLF-C02 (AWS Certified Cloud Practitioner)** lives in `clf-c02.html`: 17 lessons (15 chapters, a how-to guide and an exam-reflexes appendix), a 10-question diagnostic, 24 practice questions by domain, and a 65-question, 90-minute mock exam scored out of 1,000 (700 to pass). Switch between SAA-C03 and CLF-C02 with the certification selector at the top left of any page.

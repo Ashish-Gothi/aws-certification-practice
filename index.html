@@ -382,7 +382,6 @@ h2.sec{font-size:22px;margin:44px 0 6px}
 @media (max-width:1060px){
   .jcards{grid-template-columns:1fr 1fr;gap:12px}
   .jcard:nth-child(2) .arrow{display:none}
-  .top .certpill{display:none}
 }
 @media (max-width:900px){
   .wrap{padding:0 20px}
@@ -425,6 +424,18 @@ h2.sec{font-size:22px;margin:44px 0 6px}
   .dcard .ls .r{grid-column:2}
   .ft,.ft2{padding-left:20px;padding-right:20px}
 }
+
+.certsw{position:relative}
+.certsw>summary{list-style:none;cursor:pointer;user-select:none}
+.certsw>summary::-webkit-details-marker{display:none}
+.certsw .cv{width:6px;height:6px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);margin-top:-3px}
+.certsw[open]>summary{border-color:var(--accent)}
+.certmenu{position:absolute;top:calc(100% + 6px);left:0;min-width:300px;background:var(--surface);border:1px solid var(--line2);box-shadow:0 12px 28px rgba(17,24,35,.16);z-index:60;padding:6px}
+.certmenu a{display:block;padding:10px 12px;color:var(--ink);text-decoration:none}
+.certmenu a:hover{background:var(--surface2)}
+.certmenu a[aria-current="true"]{background:var(--accent-soft)}
+.certmenu b{display:block;font:500 12px var(--mono);letter-spacing:.1em}
+.certmenu span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -1163,7 +1174,7 @@ const NAV=[["","Journey"],["diagnostic","Diagnostic"],["learn","Learn"],["mock",
 function chrome(active,body){
   return `<header class="top"><div class="wrap">
     <a class="brand" href="#"><span class="logo" aria-hidden="true">SAA</span>AWS Cert Path</a>
-    <span class="certpill" title="Certification">SAA-C03</span>
+    <details class="certsw"><summary class="certpill" title="Switch certification" aria-label="Switch certification">SAA-C03<i class="cv"></i></summary><div class="certmenu"><a href="index.html" aria-current="true"><b>SAA-C03</b><span>Solutions Architect – Associate</span></a><a href="clf-c02.html" ><b>CLF-C02</b><span>Cloud Practitioner (foundational)</span></a></div></details>
     <nav class="nav" aria-label="Main">${NAV.map(([h,t])=>h==="|"?'<span class="sep" aria-hidden="true"></span>':`<a href="#${h}" ${active===h?'aria-current="page"':""}>${t}</a>`).join("")}</nav>
     <div class="tools"><a class="btn primary sm" href="#mock">${S.run?"Resume Mock Exam":"Take Mock Exam"}</a><button class="iconbtn" data-act="theme" aria-label="Switch light or dark mode" title="Switch light or dark mode">${IC.sun}${IC.moon}</button></div>
   </div></header><main id="main">${body}</main>
@@ -1566,6 +1577,7 @@ document.addEventListener("keydown",e=>{
   if(host&&host._key&&host._key(e.key)){e.preventDefault();return;}
   if($("#eq")){ if(e.key==="ArrowRight"){const b=$('[data-act="next"]');b&&b.click();} if(e.key==="ArrowLeft"){const b=$('[data-act="prev"]');b&&b.click();} if(e.key==="f"||e.key==="F"){const b=$('[data-act="flag"]');b&&b.click();} }
 });
+document.addEventListener("click",e=>{const d=document.querySelector(".certsw[open]");if(d&&!d.contains(e.target))d.removeAttribute("open");});
 (function(){try{const t=localStorage.getItem("saa-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
 document.addEventListener("click",e=>{
   const t=e.target.closest('[data-act="theme"]');
